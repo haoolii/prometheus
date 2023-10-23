@@ -5,11 +5,10 @@ dayjs.extend(utc);
 
 
 export const parseRecord = (record: Record) => {
-// 賣出平多	Bit浪浪 以均價 0.2382 USDT 賣出平多 GODSUSDT 永續 5.00x	10月22日 23:58:14
   const orderType = parseOrderType(record.side, record.posSide);
-  const uTimeFormat = dayjs.utc(record.uTime).format('YYYY/MM/DD hh:mm:ss');
-  const msgTimeFormat = dayjs(dayjs()).diff(record.uTime, 'seconds');
-  return `🚨🚨🚨🚨🚨\n<b>${orderType} ${record.lever}x</b>\n均價: ${record.avgPx} ${record.quoteName}\n時間: ${uTimeFormat}\n訊息: ${msgTimeFormat}s`;
+  const uTimeFormat = dayjs.utc(+record.uTime).format('YYYY/MM/DD hh:mm:ss');
+  const msgTimeFormat = dayjs(dayjs()).diff(+record.uTime, 'seconds');
+  return `🚨🚨🚨🚨🚨\n<b>${orderType} ${record.lever}x</b>\n均價: ${record.avgPx} ${record.quoteName}\n時間: ${uTimeFormat}\n延遲: ${msgTimeFormat}s`;
 };
 
 export const parseOrderType = (side: Side, posSide: PosSide) => {
