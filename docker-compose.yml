@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ph5
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - BOT_KEY=${BOT_KEY}
+      - CHANNEL_ID=${CHANNEL_ID}
+    # ports:
+    volumes:
+      - ./src:/app/src
